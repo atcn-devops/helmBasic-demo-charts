@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.name }}
+  labels:
+    app: nginx
+spec:
+  replicas: {{ .Values.deployment.replicaCount }}
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: "{{ .Values.deployment.image.app }}:{{ .Values.deployment.image.version}}"
+          imagePullPolicy: IfNotPresent
+#          readinessProbe: # Enable to fail test, disable to pass test
+#            exec:
+#              command:
+#                - cat
+#                - /tmp/healthy # this will failed it's for testing pod readiness status as not running state
+#            initialDelaySeconds: 5
+#            periodSeconds: 5
+#          livenessProbe:
+#            exec:
+#              command:
+#                - cat
+#                - /tmp/healthy
+#            initialDelaySeconds: 5
+#            periodSeconds: 5
