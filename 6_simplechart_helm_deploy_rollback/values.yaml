@@ -6,7 +6,7 @@ deployment:
   replicaCount: 1
   name: my-deployment
   image:
-    app: nginx222222222222222
+    app: nginx
     version: latest
 
 
